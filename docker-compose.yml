@@ -1,0 +1,34 @@
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      # Sincroniza tu carpeta local con el contenedor en tiempo real
+      - ./backend:/app
+      # Evita sobreescribir los modulos instalados en el contenedor
+      - /app/node_modules
+    depends_on:
+      - mongodb
+    # Comando temporal hasta que configuremos server.js
+    command: node server.js 
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:4200" # Puerto por defecto de Angular en desarrollo
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

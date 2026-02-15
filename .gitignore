@@ -1,0 +1,19 @@
+# Dependencias de Node
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Datos de MongoDB local
+mongo_data/
+
+# Variables de entorno y secretos
+.env
+
+# Archivos de compilación
+dist/
+frontend/dist/
+
+# Archivos del sistema operativo y editores
+.DS_Store
+.vscode/
+*.log
